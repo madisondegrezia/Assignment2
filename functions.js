@@ -1,3 +1,5 @@
+// Madison DeGrezia Assignment #2
+
 // array for questions 1-9
 let myArr = [1, 2, 5, 7, 8, 9];
 
@@ -303,6 +305,88 @@ console.log(arrayToList([10, 20]));
 
 function listToArray(list) {
   let arr = [];
+  for (let node = list; node; node = node.rest) {
+    // pushes the value into the array
+    arr.push(node.value);
+  }
+  return arr;
 }
 
+console.log("\nMiscellaneous #4: listToArray function");
+console.log(listToArray(arrayToList([10, 20, 30])));
+
+function prepend(value, rest) {
+  let list = {
+    value: value,
+    rest: rest,
+  };
+  return list;
+}
+
+console.log("\nMiscellaneous #4: prepend function");
+console.log(prepend(10, prepend(20, null)));
+
+function nth(list, num) {
+  if (num === 0) {
+    return list.value;
+  } else {
+    return nth(list.rest, num - 1);
+  }
+}
+
+console.log("\nMiscellaneous #4: nth function");
+console.log(nth(arrayToList([10, 20, 30]), 1));
+
 // miscellaneous problem #5
+function deepEqual(x, y) {
+  // check X is Simple and Y is Simple
+  if (!isReal(x) && !isReal(y)) {
+    return x === y;
+  }
+
+  // check X is Complex and Y is Simple
+  if (isReal(x) && !isReal(y)) {
+    return false;
+  }
+
+  // check X is Simple and Y is Complex
+  if (!isReal(x) && isReal(y)) {
+    return false;
+  }
+
+  let count = 0;
+  Object.keys(x).forEach((keyName) => {
+    let result = deepEqual(x[keyName], y[keyName]);
+    if (!result) count++;
+  });
+
+  return count == 0;
+}
+
+function isReal(x) {
+  return typeof x == "object" && x != null;
+}
+function numProperties(x) {
+  return Object.keys(x).length;
+}
+function propertyKeysEqual(X, Y) {
+  let count = 0;
+  Object.keys(X).forEach((keyName) => {
+    result = Y.hasOwnProperty(keyName);
+    if (!result) {
+      // does not have it
+      count++;
+    }
+  });
+  return count == 0;
+}
+
+console.log("\nMiscellaneous #5: deepEqual function");
+
+let obj2 = { here: { is: "an" }, object: 2 };
+console.log("-------CASE1-------");
+console.log(deepEqual(obj2, obj2));
+console.log("-------CASE2-------");
+console.log(deepEqual(obj2, { here: 1, object: 2 }));
+console.log("-------CASE3-------");
+console.log(deepEqual(obj2, { here: { is: "an" }, object: 2 }));
