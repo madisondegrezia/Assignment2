@@ -89,21 +89,20 @@ console.log("\n#5: MyEvery function");
 console.log(myEvery(myArr, greaterThanFour));
 
 // #6 myReduce function
-// ****** GO OVER THIS ******
 function myReduce(arr, cb) {
-  let result = 0;
+  let res = 0;
   for (let i = 0; i < arr.length; i++) {
-    result = cb(result, arr[i]);
+    res = cb(res, arr[i]);
   }
-  return result;
+  return res;
 }
 
-function sum(a, b) {
+function addElems(a, b) {
   return a + b;
 }
 
 console.log("\n#6: MyReduce function");
-console.log(myReduce(myArr, sum));
+console.log(myReduce(myArr, addElems));
 
 // #7 myIncludes function
 function myIncludes(arr, target) {
@@ -255,13 +254,15 @@ function range(start, end, increment) {
     resultArr.push(start);
     start += increment;
   }
-  console.log(resultArr);
+  //console.log(resultArr);
   return resultArr;
 }
 
 let sampleArr = [3, 4, 5, 10];
 console.log("\nMiscellaneous #2: Sum of a range function");
-console.log("Sum: " + sum(range(1, 10, 2)));
+console.log(range(1, 10));
+console.log(range(5, 2, -1));
+console.log("Sum: " + sum(range(1, 10)));
 
 // miscellaneous problem #3
 let initialArr = [2, 4, 6, 8];
